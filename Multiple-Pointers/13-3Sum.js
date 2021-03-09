@@ -8,6 +8,36 @@ Notice that the solution set must not contain duplicate triplets.
 
 */
 
+// O(n^2) time | O(n) space
+function threeNumberSum(array, targetSum) {
+  let triplets = [];
+
+  array.sort((a, b) => a - b);
+
+  for (let left = 0; left < array.length - 2; left++) {
+    let middle = left + 1;
+    let right = array.length - 1;
+
+    while (middle < right) {
+      let sum = array[left] + array[middle] + array[right];
+
+      if (sum === targetSum) {
+        triplets.push([array[left], array[middle], array[right]]);
+        middle++;
+        right--;
+      } else if (sum > targetSum) {
+        right--;
+      } else {
+        middle++;
+      }
+    }
+  }
+
+  return triplets;
+}
+
+////// MORE IN DEPTH - No Duplicates///////
+
 var threeSum = function (nums) {
   const results = [];
 

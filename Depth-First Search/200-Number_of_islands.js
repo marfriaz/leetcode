@@ -23,7 +23,7 @@ var numIslands = function (grid) {
 
   let count = 0;
 
-  function dfs(grid, column, row) {
+  function dfs(grid, row, column) {
     if (
       // if went above grid
       row < 0 ||
@@ -56,17 +56,6 @@ var numIslands = function (grid) {
     // sink it so that we dont revisit it
     // and then visit all adjacent neighbors
     // mark as a visited node with 0
-    if (grid[column][row] === "1") {
-      grid[column][row] = "0";
-    } else {
-      // else stop traversing, move onto next one
-      return 0;
-    }
-
-    dfs(grid, column + 1, row);
-    dfs(grid, column - 1, row);
-    dfs(grid, column, row + 1);
-    dfs(grid, column, row - 1);
   }
   // traverse entire matrix
 

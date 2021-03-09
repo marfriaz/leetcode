@@ -1,39 +1,29 @@
-//////// Find Duplicate File in System ///////
+var findCircleNum7 = function (isConnected) {
+  let visited = {};
+  let count = 0;
+  let queue = [];
 
-// hashmap
-
-/*
-Given an array of intervals where intervals[i] = [starti, endi], 
-merge all overlapping intervals, and return an array of the non-overlapping 
-intervals that cover all the intervals in the input.
-*/
-
-var findDuplicate = function (paths) {
-  let map = {};
-
-  for (let text of paths) {
-    let files = text.split(" ");
-
-    let content = "";
-
-    for (let i = 1; i < files.length; i++) {
-      let parenth = files[i].indexOf("(");
-      let content = files[i].substring(parenth + 1, files[i].length - 1);
-
-      map[content] = map[content] || [];
-      map[content].push(files[0] + "/" + files[i].substring(0, parenth));
+  for (let i = 0; i < isConnected.length; i++) {
+    if (!visited[i]) {
+      queue.push(i);
+      while (queue.length) {
+        let s = queue.shift();
+        visited[s] = true;
+        for (let j = 0; j < isConnected.length; j++) {
+          if (isConnected[s][j] && !visited[j]) {
+            queue.push(j);
+          }
+        }
+      }
+      count++;
     }
   }
-  return Object.values(map).filter((dups) => dups.length > 1);
+  return count;
 };
 
-var input = [
-  "root/a 1.txt(abcd) 2.txt(efgh)",
-  "root/c 3.txt(abcd)",
-  "root/c/d 4.txt(efgh)",
-  "root 4.txt(efgh)",
-];
-
-// Output: [["root/a/2.txt", "root/c/d/4.txt", "root/4.txt"],["root/a/1.txt", "root/c/3.txt"],];
-
-console.log(findDuplicate(input));
+let isConnected = [
+  [1, 0, 0],
+  [0, 1, 0],
+  [0, 0, 1],
+]; // 3
+console.log(findCircleNum7(isConnected));

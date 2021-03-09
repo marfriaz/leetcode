@@ -1,12 +1,10 @@
 //////// Lowest Common Ancestor of a Binary Tree ///////
 /*
-Given the root of a binary tree, determine if it is a valid binary search tree (BST).
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
 
-A valid BST is defined as follows:
-
-The left subtree of a node contains only nodes with keys less than the node's key.
-The right subtree of a node contains only nodes with keys greater than the node's key.
-Both the left and right subtrees must also be binary search trees.
+According to the definition of LCA on Wikipedia: 
+“The lowest common ancestor is defined between two nodes p and q as the lowest node in 
+T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
 */
 
 /**

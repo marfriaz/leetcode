@@ -14,40 +14,11 @@ Input: s = "226"
 Output: 3
 Explanation: "226" could be decoded as "BZ" (2 26), "VF" (22 6), or "BBF" (2 2 6).
 */
-var numDecodings = function (s) {
-  if (s.length == 1) {
-    return isValidEncoding(s) ? 1 : 0;
-  }
 
-  var dpTable = new Array(s.length);
-
-  dpTable[0] = isValidEncoding(s[0]) ? 1 : 0;
-
-  dpTable[1] =
-    (isValidEncoding(s[1]) ? dpTable[0] : 0) +
-    (isValidEncoding(s.substr(0, 2)) ? 1 : 0);
-
-  for (var i = 2; i < s.length; i++) {
-    dpTable[i] =
-      (isValidEncoding(s[i]) ? dpTable[i - 1] : 0) +
-      (isValidEncoding(s.substr(i - 1, 2)) ? dpTable[i - 2] : 0);
-  }
-  var isValidEncoding = (encoding) => {
-    if (encoding.length == 1) {
-      return encoding != "0";
-    } else if (encoding.length == 2) {
-      var num = parseInt(encoding, 10);
-      return num >= 10 && num <= 26;
-    } else {
-      return false;
-    }
-  };
-
-  return dpTable[dpTable.length - 1];
-};
-
-////// NEXT SOLUTION
-// Iterative: O(N)
+//////
+// Iterative: O(N) | Space: O(1)
+// For calculating dp[i] we need to know dp[i-1] and dp[i-2] only.
+// Thus, we can easily cut down our O(N)O(N) space requirement to O(1)O(1) by using only two variables to store the last two results.
 function numDecodings2(s) {
   if (s == null || s.length === 0) {
     return 0;
@@ -71,7 +42,7 @@ function numDecodings2(s) {
     const a = Number(s.slice(i - 1, i)); // last one digit
     // check if valid single digit decode is possible (non zero)
     if (a >= 1 && a <= 9) {
-      // if possible, add dp[i-1] to dp[i]
+      // if possible, add dp[i-1] to dp[i], currently 0
       dp[i] += dp[i - 1];
     }
 
@@ -89,3 +60,45 @@ function numDecodings2(s) {
 
 const str = "12";
 console.log(numDecodings(str));
+
+// Recursive with Memoization (helps with pruning in recursive)
+// Time: O(N) | Space: O(N)
+var numDecodings = function (s) {
+  if (s.length == 1) {
+    return isValidEncoding(s) ? 1 : 0;
+  }
+
+  // Memoization table
+  var dpTable = new Array(s.length);
+
+  // Check first 2 letters
+  dpTable[0] = isValidEncoding(s[0]) ? 1 : 0;
+
+  dpTable[1] =
+    (isValidEncoding(s[1]) ? dpTable[0] : 0) +
+    (isValidEncoding(s.substr(0, 2)) ? 1 : 0);
+
+  // Recursively
+  for (var i = 2; i < s.length; i++) {
+    dpTable[i] =
+      (isValidEncoding(s[i]) ? dpTable[i - 1] : 0) +
+      (isValidEncoding(s.substr(i - 1, 2)) ? dpTable[i - 2] : 0);
+  }
+
+  var isValidEncoding = (encoding) => {
+    if (encoding.length == 1) {
+      {
+        return encoding != "0";
+      }
+    } else if (encoding.length == 2) {
+      var num = parseInt(encoding, 10);
+      {
+        return num >= 10 && num <= 26;
+      }
+    } else {
+      return false;
+    }
+  };
+
+  return dpTable[dpTable.length - 1];
+};

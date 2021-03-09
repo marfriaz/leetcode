@@ -17,7 +17,7 @@ var isPalindrome = function (s) {
   return cleaned.toLowerCase() == reversedAndCleaned.toLowerCase();
 };
 
-// Two-Pointers
+// Two-PointersO(n) time | O(1) space
 
 var isPalindrome2 = function (s) {
   if (s.length == 0) {
