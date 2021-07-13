@@ -10,30 +10,29 @@ let s = "babad"; //"bab"
 var longestPalindrome = function (s) {
   let longest = "";
 
-  const expandAroundCenter = (str, i, j) => {
-    // expanding from center
-    while (i >= 0 && j < str.length && str[i] === str[j]) {
-      i -= 1;
-      j += 1;
-    }
-    // slice the qualified substring from the second last iteration
-    return str.slice(i + 1, j);
-  };
-
   for (let i = 0; i < s.length; i++) {
-    const current1 = expandAroundCenter(s, i, i);
+    const even = expandAroundCenter(s, i, i);
 
     // palindrome can center around 1 or 2 letters
-    const current2 = expandAroundCenter(s, i, i + 1);
+    const odd = expandAroundCenter(s, i, i + 1);
 
-    const longerPalindrome =
-      current1.length > current2.length ? current1 : current2;
+    const longerPalindrome = even.length > odd.length ? even : odd;
 
     if (longerPalindrome.length > longest.length) {
       longest = longerPalindrome;
     }
   }
   return longest;
+};
+
+const expandAroundCenter = (str, i, j) => {
+  // expanding from center
+  while (i >= 0 && j < str.length && str[i] === str[j]) {
+    i -= 1;
+    j += 1;
+  }
+  // slice the qualified substring from the second last iteration
+  return str.slice(i + 1, j);
 };
 
 let s = "babad"; //"bab"

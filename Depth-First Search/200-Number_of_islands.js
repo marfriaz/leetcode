@@ -76,4 +76,4 @@ var numIslands = function (grid) {
   return count;
 };
 
-console.log(numIslands2(grid));
+console.log(numIslands(grid));

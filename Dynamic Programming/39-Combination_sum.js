@@ -20,12 +20,15 @@ var combinationSum = function (candidates, target) {
   var res = [];
 
   function search(idx, prefix, target) {
+    // you found target, return prefix
     if (target === 0) {
       res.push(prefix.slice());
     }
+    // at end
     if (idx === length) {
       return;
     }
+    // target DNE
     if (target <= 0) {
       return;
     }

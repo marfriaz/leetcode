@@ -7,6 +7,8 @@ You may assume all four edges of the grid are surrounded by water.
 Find the maximum area of an island in the given 2D array. (If there is no island, the maximum area is 0.)
 */
 
+// Time Complexity: O(m*n), we possibly visit all nodes
+// Space Complexity: O(m*n), call stack can go as deep as the # of nodes
 var maxAreaOfIsland = function (grid) {
   if (grid.length == 0) {
     return 0;
@@ -27,22 +29,15 @@ var maxAreaOfIsland = function (grid) {
       return 0;
     }
 
-    const DIRECTIONS = [
-      [-1, 0],
-      [0, 1],
-      [1, 0],
-      [0, -1],
-    ];
-
     let count = 1;
 
     // in the process, change the 1 to a zero
     grid[r][c] = 0;
 
-    // go left, right, up and down
-    for (let dir of DIRECTIONS) {
-      count += dfs(r + dir[0], c + dir[1], grid);
-    }
+    count += dfs(r - 1, c);
+    count += dfs(r + 1, c);
+    count += dfs(r, c - 1);
+    count += dfs(r, c + 1);
 
     return count;
   };
@@ -56,8 +51,6 @@ var maxAreaOfIsland = function (grid) {
   }
 
   return max;
-  // Time Complexity: O(m*n), we possibly visit all nodes
-  // Space Complexity: O(m*n), call stack can go as deep as the # of nodes
 };
 
 // Helper function

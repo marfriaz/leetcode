@@ -5,7 +5,8 @@ Write a function to compute the fewest number of coins that you need to make up 
 You may assume that you have an infinite number of each kind of coin.
 */
 
-// Dynamic Programming
+// Dynamic Programming 
+// O(nd) time  | O(n) space
 var coinChange = function (coins, amount) {
   if (!amount || !coins.length) {
     return 0;

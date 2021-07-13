@@ -1,3 +1,12 @@
+//////// Find max events ///////
+/* 
+
+Given 2 arrays: arrivals and their durations, determine the max number of events 
+that may occur. 
+
+*/
+
+//  O(n^2) time | O(1) space
 function maxEvents(arrival, duration) {
   let events = [];
   let maxNumEvents = 1;
@@ -45,37 +54,11 @@ function maxEvents(arrival, duration) {
 // let duration = [ 924, 710, 441, 166, 493, 43, 988 ]
 
 let arrival = [
-  150,
-  580,
-  822,
-  968,
-  673,
-  394,
-  337,
-  486,
-  746,
-  229,
-  92,
-  195,
-  358,
-  2,
+  150, 580, 822, 968, 673, 394, 337, 486, 746, 229, 92, 195, 358, 2,
 ]; // 5
 let duration = [
-  154,
-  709,
-  945,
-  669,
-  491,
-  125,
-  197,
-  531,
-  904,
-  723,
-  667,
-  550,
-  25,
-  802,
+  154, 709, 945, 669, 491, 125, 197, 531, 904, 723, 667, 550, 25, 802,
 ];
 // let arrival = [1,1,1,1,4]  // 2
 // let duration = [10,3,4,6,2]
-console.log(maxEvents(arrival, duration));
+console.log(maxEvents(arrival, duration)); // 4

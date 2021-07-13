@@ -15,37 +15,37 @@ var convert = function (s, numRows) {
   if (numRows < 2) {
     return s;
   }
-  var matrix = [];
-  // set matric with empty arrays for filling
-  for (var i = 0; i < numRows; i++) {
+  let matrix = [];
+  // set matrix with empty arrays for filling
+  for (let i = 0; i < numRows; i++) {
     matrix.push([]);
   }
 
-  var k = 0; // letter of string
-  var i = 0; // Row that we're on: height = rows
-  var res = ""; // new String from new matrix
+  let letterIndex = 0; // letter of string
+  let row = 0; // Row that we're on: height = rows
+  let res = ""; // new String from new matrix
 
   // fill matrix
-  while (k < s.length) {
-    while (i < matrix.length && k < s.length) {
-      matrix[i].push(s[k]); // down
-      console.log("down", matrix);
-      i++;
-      k++;
+  while (letterIndex < s.length) {
+    while (row < matrix.length && letterIndex < s.length) {
+      matrix[row].push(s[letterIndex]); // down
+      // console.log("down", matrix);
+      row++;
+      letterIndex++;
     }
-    i = i - 2;
-    while (i >= 0 && k < s.length) {
-      matrix[i].push(s[k]); // up
-      console.log("up", matrix);
-      i--;
-      k++;
+    row = row - 2;
+    while (row >= 0 && letterIndex < s.length) {
+      matrix[row].push(s[letterIndex]); // up
+      // console.log("up", matrix);
+      row--;
+      letterIndex++;
     }
-    i = i + 2;
+    row = row + 2;
   }
 
   // Create result string from new matrix
-  for (var i = 0; i < matrix.length; i++) {
-    for (var k = 0; k < matrix[i].length; k++) {
+  for (let i = 0; i < matrix.length; i++) {
+    for (let k = 0; k < matrix[i].length; k++) {
       res += matrix[i][k];
     }
   }

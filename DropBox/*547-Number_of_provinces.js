@@ -23,37 +23,49 @@ let isConnected = [
 */
 // DFS
 // Time O (N^2) | Space O(N)
+
+// TO FIND THE NUMBER OF CONNECTED COMPONENTS IN AN UNDIRECTED GRAPH, 
+//WE CAN USE A DFS ON EACH NODE
+// WE KEEP TRACK OF WHICH NODE HAS ALREADY BEEN VISITED
+  // IF NOT ALREADY VISITED, WE DO A DFS ON THAT NODE AND MARK IT'S 
+  //NEIGHBORS AS VISITED
+// ESSENTIALLY, WE ARE DIGGING AS DEEP AS POSSIBLE IN THE LEVELS OF THE GRAPH, 
+//FOR THE STARTING NODE 
+// LEAVING IT'S OTHER DIRECT NEIGHBORS TO BE VISITED LATER
 var findCircleNum = function (isConnected) {
   let count = 0; // conected component
   var visited = {};
+
+  // ALTERNATIVELY COULD USE
+  // let visited = new Array(isConnected.length).fill(0)
 
   let rows = isConnected.length;
 
   const dfs = (row) => {
     let cols = isConnected[row].length; // row
 
-    // iterate over all columns of row
+    // ITERATE OVER NEIGHBOR'S NEIGHBORS
     for (let col = 0; col < cols; col++) {
       // if potent province = 1 and it hasnt been visited, mark column as visited
       // Visited = verified that it is a province (visited column of row)
-      // visit neighbors, rather than siblings
+      // VISIT NEIGHBORS, RATHER THAN SIBLINGS
       if (isConnected[row][col] == 1 && !visited[col]) {
         visited[col] = true;
         console.log(visited);
         // Graph (nxn) => col = row
         console.log(col);
-        dfs(col); // check rest or row
+        dfs(col); // check rest of neighbors of this neighbor, rather than siblings
       }
     }
   };
 
   // iterate over rows (max count provinces = rows = grid.length )
+  // ITERATE OVER MATRIX
   for (let row = 0; row < rows; row++) {
     // if vertex not visited we do dfs for this vertex
     // after we are done, we up count by 1, because we are done with count
     // and new count will have another count number, up by 1
-    // visit neighbors, rather than siblings
-
+    // visit a neigbor, then their neighbors, rather than siblings
     if (!visited[row]) {
       dfs(row);
       // WE INCREMENT THE COUNT OF CONNECTED COMPONENTS FOR EVERY NEW STARTING NODE

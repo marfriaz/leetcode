@@ -10,8 +10,9 @@ ith city and the jth city are directly connected, and isConnected[i][j] = 0 othe
 
 Return the total number of provinces.
 */
-// DFS
 
+// THIS PROBLEM HAS TO DO WITH VERTEXES
+// Time Complexity: O(N^2) | Space Complexity: O(N)
 var findCircleNum = function (isConnected) {
   // https://www.coursera.org/learn/algorithms-part2/lecture/Dzl65/connected-components
   // please see how BFS and connected component algorithms are explained
@@ -54,7 +55,11 @@ let isConnected = [
 
 console.log(findCircleNum(isConnected));
 
-///// INCORRECT, just needed to check rows
+////////////
+////////////
+////////////
+///// INCORRECT, just needed to check rows ////////////
+////////////
 
 var findCircleNum2 = function (isConnected) {
   let height = isConnected[0].length;

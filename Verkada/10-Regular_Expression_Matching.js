@@ -6,6 +6,7 @@
 The matching should cover the entire input string (not partial).
 */
 
+// RECURSIVE
 const isMatch = (string, pattern) => {
   // early return when pattern is empty
   if (string.length === 0 && pattern.length === 0) {
@@ -30,7 +31,10 @@ const isMatch = (string, pattern) => {
     // That's because current char matches the pattern char.
     return (
       isMatch(string, pattern.slice(2)) ||
+      // For wanting 0 of pattern^
       (hasFirstCharMatch && isMatch(string.slice(1), pattern))
+      // For MAYBE repetition in string^
+      // string is sliced, not pattern
     );
   }
 
@@ -41,11 +45,25 @@ const isMatch = (string, pattern) => {
 };
 
 var str = "ab";
+// let s = "aab",
+//   p = "c*a*b"; // true
 var pat = ".*";
 
 console.log(isMatch(str, pat));
 
-////// PRAMP GUYS ANSWER
+/// Dynamic Programming Answer
+var isMatch3 = function (s, p) {
+  if (!p) return !s;
+  let first = !!s && (p[0] === s[0] || p[0] === ".");
+
+  if (p.length >= 2 && p[1] === "*") {
+    return isMatch(s, p.slice(2)) || (first && isMatch(s.slice(1), p));
+  } else {
+    return first && isMatch(s.slice(1), p.slice(1));
+  }
+};
+
+////// PRAMP GUYS ANSWER -- WRONG
 
 function isMatch2(text, pattern) {
   // your code goes here
@@ -78,6 +96,7 @@ function isMatch2(text, pattern) {
   }
   return textIndex >= text.length;
 }
+// console.log(isMatch2(str, pat));
 
 //return fasle if text or pattern is empty
 // iterate pattern
