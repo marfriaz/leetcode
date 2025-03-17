@@ -8,10 +8,35 @@ You want to maximize your profit by choosing a single day to buy one stock and c
 Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
 */
 
-// time: O(n), need to iterate all the string
-// space: O(n)
+/*
+Solution 1: 2 Pointers
+  Time Complexity: O(n)
+  Space Complexity: O(1)
+*/
+const maxProfit = (prices) => {
+  let left = 0; // Buy
+  let right = 1; // sell
+  let max_profit = 0;
+  while (right < prices.length) {
+    if (prices[left] < prices[right]) {
+      let profit = prices[right] - prices[left]; // our current profit
 
-var maxProfit = function (prices) {
+      max_profit = Math.max(max_profit, profit);
+    } else {
+      left = right;
+    }
+    right++;
+  }
+  return max_profit;
+};
+
+/*
+Solution 2: 
+  Time Complexity: O(n)
+  Space Complexity: O(n)?
+*/
+
+var maxProfit2 = function (prices) {
   // Max is = price on a certain day - minimum price
   // Minumum price could change as we move through prices
   // So should change minPrice compared to our first minPrice
@@ -30,4 +55,4 @@ var maxProfit = function (prices) {
 };
 
 let prices = [7, 1, 5, 3, 6, 4];
-console.log(maxProfit(prices)); // 5
+console.log(maxProfit2(prices)); // 5
